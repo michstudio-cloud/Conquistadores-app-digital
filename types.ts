@@ -1,5 +1,3 @@
-import React from 'react';
-
 export enum EvidenceStatus {
   PENDING = 'PENDING',
   SUBMITTED = 'SUBMITTED',
@@ -20,6 +18,7 @@ export interface Evidence {
   status: EvidenceStatus;
   aiFeedback?: string;
   submittedAt?: Date;
+  instructorFeedback?: string;
 }
 
 export interface Requirement {
@@ -32,23 +31,24 @@ export interface Requirement {
 export interface Specialty {
   id: string;
   title: string;
-  description: string;
+  category: string;
   icon: string; // emoji
   requirements: Requirement[];
 }
 
 export interface User {
   id: string;
-  email: string;
   username: string;
-  phone: string;
+  email: string;
+  phone?: string;
   birthDate?: string;
   gender?: string;
   country?: string;
   postalCode?: string;
   city?: string;
-  interests: string[];
   clubId?: string;
+  interests?: string[];
+  specialties: Specialty[];
 }
 
 export interface Interest {
@@ -58,8 +58,14 @@ export interface Interest {
 }
 
 export interface Club {
+  id: string;
+  name: string;
+  zone: string;
+  logo: string; // emoji
+}
+
+export interface SpecialtyCategory {
     id: string;
     name: string;
-    logo: React.ReactNode;
-    zone: string;
+    icon: string;
 }
