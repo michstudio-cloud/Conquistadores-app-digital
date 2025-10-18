@@ -1,3 +1,4 @@
+
 export enum EvidenceStatus {
   PENDING = 'PENDING',
   SUBMITTED = 'SUBMITTED',
@@ -32,40 +33,20 @@ export interface Specialty {
   id: string;
   title: string;
   category: string;
-  icon: string; // emoji
+  imageUrl: string;
   requirements: Requirement[];
-}
-
-export interface User {
-  id: string;
-  username: string;
-  email: string;
-  phone?: string;
-  birthDate?: string;
-  gender?: string;
-  country?: string;
-  postalCode?: string;
-  city?: string;
-  clubId?: string;
-  interests?: string[];
-  specialties: Specialty[];
-}
-
-export interface Interest {
-  id: string;
-  name: string;
-  icon: string; // emoji
-}
-
-export interface Club {
-  id: string;
-  name: string;
-  zone: string;
-  logo: string; // emoji
 }
 
 export interface SpecialtyCategory {
     id: string;
     name: string;
-    icon: string;
+    specialties: Specialty[];
+}
+
+export interface Event {
+    id: string;
+    title: string;
+    date: string;
+    location: string;
+    imageUrl: string;
 }

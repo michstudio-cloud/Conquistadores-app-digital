@@ -1,22 +1,29 @@
-import React from 'react';
-// FIX: Added .ts extension to the import path.
-import { Specialty, SpecialtyCategory } from '../types.ts';
-// FIX: Added .tsx extension to the import path.
+
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { mockCategories } from '../services/mockData.ts';
+import { SpecialtyCategory } from '../types.ts';
 import SpecialtyCard from './SpecialtyCard.tsx';
 
-interface CategoryDetailProps {
-    category: SpecialtyCategory;
-    specialties: Specialty[];
-    onSelectSpecialty: (specialty: Specialty) => void;
-}
+const CategoryDetail: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const [category, setCategory] = useState<SpecialtyCategory | null>(null);
 
-const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, specialties, onSelectSpecialty }) => {
+    useEffect(() => {
+        const foundCategory = mockCategories.find(c => c.id === id) || null;
+        setCategory(foundCategory);
+    }, [id]);
+
+    if (!category) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{category.name}</h3>
-            <div className="grid grid-cols-2 gap-4">
-                {specialties.map(spec => (
-                    <SpecialtyCard key={spec.id} specialty={spec} onSelect={onSelectSpecialty} />
+        <div className="container mx-auto">
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">{category.name}</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {category.specialties.map(specialty => (
+                    <SpecialtyCard key={specialty.id} specialty={specialty} />
                 ))}
             </div>
         </div>

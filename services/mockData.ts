@@ -1,119 +1,98 @@
-import { User, Specialty, Requirement, EvidenceStatus, Interest, Club, SpecialtyCategory } from '../types.ts';
 
-export const MOCK_INTERESTS: Interest[] = [
-    { id: '1', name: 'Naturaleza', icon: '🌳' },
-    { id: '2', name: 'Arte', icon: '🎨' },
-    { id: '3', name: 'Música', icon: '🎵' },
-    { id: '4', name: 'Deportes', icon: '⚽' },
-    { id: '5', name: 'Ciencia', icon: '🔬' },
-    { id: '6', name: 'Cocina', icon: '🍳' },
-    { id: '7', name: 'Aventura', icon: '🧭' },
-    { id: '8', name: 'Fotografía', icon: '📷' },
-];
+import { Specialty, SpecialtyCategory, Event, Requirement, EvidenceStatus } from '../types.ts';
 
-export const MOCK_CLUBS_LIST: Club[] = [
-    { id: 'c1', name: 'Club A', zone: 'Norte', logo: '🦁' },
-    { id: 'c2', name: 'Club B', zone: 'Norte', logo: '🦅' },
-    { id: 'c3', name: 'Club C', zone: 'Sur', logo: '🐺' },
-    { id: 'c4', name: 'Club D', zone: 'Sur', logo: '🐻' },
-    { id: 'c5', name: 'Club E', zone: 'Centro', logo: '🦈' },
-    { id: 'c6', name: 'Club F', zone: 'Centro', logo: '🐅' },
-];
-
-const mockRequirements: Requirement[] = [
-  {
-    id: 'r1',
-    title: 'Nudo As de Guía',
-    description: 'Aprender y demostrar cómo hacer el nudo As de Guía correctamente. Debe ser firme y no deslizarse.',
-    evidence: {
-      id: 'e1',
-      description: '',
-      status: EvidenceStatus.PENDING,
+export const mockRequirements: Requirement[] = [
+    {
+        id: 'req-1',
+        title: 'Requirement 1: Knot Tying',
+        description: 'Demonstrate how to tie a bowline, a sheet bend, and a clove hitch.',
+        evidence: {
+            id: 'ev-1',
+            description: '',
+            status: EvidenceStatus.PENDING,
+        }
     },
-  },
-  {
-    id: 'r2',
-    title: 'Primeros Auxilios: ABC',
-    description: 'Explicar qué significa el ABC de la reanimación y demostrar la posición de recuperación.',
-    evidence: {
-      id: 'e2',
-      description: 'He practicado la posición con mi hermano y adjunto una foto.',
-      status: EvidenceStatus.SUBMITTED,
-      file: { name: 'posicion.jpg', base64: '', type: 'image/jpeg' },
-      submittedAt: new Date('2023-10-26T10:00:00Z'),
+    {
+        id: 'req-2',
+        title: 'Requirement 2: First Aid',
+        description: 'Explain the ABCs of CPR and demonstrate the recovery position.',
+        evidence: {
+            id: 'ev-2',
+            description: 'I have described the ABCs in the text and attached a photo of the recovery position.',
+            status: EvidenceStatus.SUBMITTED,
+            submittedAt: new Date('2023-10-26T10:00:00Z'),
+            file: {
+                name: 'recovery-position.jpg',
+                base64: '', // placeholder
+                type: 'image/jpeg'
+            }
+        }
     },
-  },
-  {
-    id: 'r3',
-    title: 'Identificar 5 árboles',
-    description: 'Salir a la naturaleza e identificar 5 tipos de árboles nativos de tu región. Tomar fotos y describirlos.',
-    evidence: {
-      id: 'e3',
-      description: 'Identifiqué un roble, un pino, un arce, un sauce y un abeto. Adjunto las fotos y una breve descripción de cada uno.',
-      status: EvidenceStatus.COMPLETE,
-      file: { name: 'arboles.zip', base64: '', type: 'application/zip' },
-      submittedAt: new Date('2023-10-25T15:30:00Z'),
-    },
-  },
+    {
+        id: 'req-3',
+        title: 'Requirement 3: Camp Cooking',
+        description: 'Plan a menu for a weekend campout and cook one meal over a fire.',
+        evidence: {
+            id: 'ev-3',
+            description: 'Here is my menu plan and a picture of the chili I cooked.',
+            status: EvidenceStatus.COMPLETE,
+            aiFeedback: "¡Excelente trabajo! El menú se ve delicioso y bien balanceado, y la foto del chili se ve increíble. ¡Parece que dominas la cocina de campamento!",
+            submittedAt: new Date('2023-10-25T15:30:00Z'),
+            instructorFeedback: 'Great job, approved!',
+        }
+    }
 ];
 
-
-export const MOCK_SPECIALTIES: Specialty[] = [
-  {
-    id: 's1',
-    title: 'Nudos',
-    category: 'Artes Manuales',
-    icon: '🪢',
-    requirements: mockRequirements,
-  },
-  {
-    id: 's2',
-    title: 'Primeros Auxilios',
-    category: 'Salud',
-    icon: '🩹',
-    requirements: [
-      {
-        id: 'r2-1',
-        title: 'Tratamiento de quemaduras',
-        description: 'Describir los diferentes grados de quemaduras y el tratamiento de primeros auxilios para cada uno.',
-        evidence: { id: 'e2-1', description: '', status: EvidenceStatus.PENDING },
-      },
-      {
-        id: 'r2-2',
-        title: 'Vendajes',
-        description: 'Demostrar 3 tipos de vendajes: circular, en espiral y en ocho.',
-        evidence: { id: 'e2-2', description: '', status: EvidenceStatus.PENDING },
-      },
-    ],
-  },
-  {
-    id: 's3',
-    title: 'Cocina',
-    category: 'Hogar',
-    icon: '🍳',
-    requirements: [],
-  },
-  {
-    id: 's4',
-    title: 'Fotografía',
-    category: 'Artes Manuales',
-    icon: '📷',
-    requirements: [],
-  },
+export const mockSpecialties: Specialty[] = [
+    {
+        id: 'spec-1',
+        title: 'Camping Skills I',
+        category: 'Outdoor Activities',
+        imageUrl: 'https://placehold.co/600x400/5E5CE6/white?text=Camping',
+        requirements: mockRequirements,
+    },
+    {
+        id: 'spec-2',
+        title: 'First Aid',
+        category: 'Health & Science',
+        imageUrl: 'https://placehold.co/600x400/5E5CE6/white?text=First+Aid',
+        requirements: [],
+    },
+     {
+        id: 'spec-3',
+        title: 'Knots',
+        category: 'Outdoor Activities',
+        imageUrl: 'https://placehold.co/600x400/5E5CE6/white?text=Knots',
+        requirements: [],
+    }
 ];
 
+export const mockCategories: SpecialtyCategory[] = [
+    {
+        id: 'cat-1',
+        name: 'Outdoor Activities',
+        specialties: mockSpecialties.filter(s => s.category === 'Outdoor Activities'),
+    },
+    {
+        id: 'cat-2',
+        name: 'Health & Science',
+        specialties: mockSpecialties.filter(s => s.category === 'Health & Science'),
+    }
+];
 
-export const MOCK_USER: User = {
-    id: 'u1',
-    username: 'Juan Pérez',
-    email: 'juan.perez@example.com',
-    specialties: MOCK_SPECIALTIES,
-};
-
-export const MOCK_CATEGORIES: SpecialtyCategory[] = [
-    { id: 'cat1', name: 'Artes Manuales', icon: '🎨' },
-    { id: 'cat2', name: 'Naturaleza', icon: '🌳' },
-    { id: 'cat3', name: 'Salud', icon: '❤️' },
-    { id: 'cat4', name: 'Hogar', icon: '🏠' },
-    { id: 'cat5', name: 'Misioneras', icon: '🕊️' },
+export const mockEvents: Event[] = [
+    {
+        id: 'event-1',
+        title: 'Pathfinder Camporee',
+        date: 'Oct 28-30, 2024',
+        location: 'Camp Wilderness',
+        imageUrl: 'https://placehold.co/600x400/34D399/white?text=Camporee',
+    },
+    {
+        id: 'event-2',
+        title: 'Community Service Day',
+        date: 'Nov 12, 2024',
+        location: 'City Park',
+        imageUrl: 'https://placehold.co/600x400/34D399/white?text=Service',
+    }
 ];

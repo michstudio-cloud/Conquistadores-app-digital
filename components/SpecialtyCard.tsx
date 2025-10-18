@@ -1,21 +1,21 @@
+
 import React from 'react';
-// FIX: Added .ts extension to the import path.
+import { Link } from 'react-router-dom';
 import { Specialty } from '../types.ts';
 
 interface SpecialtyCardProps {
     specialty: Specialty;
-    onSelect: (specialty: Specialty) => void;
 }
 
-const SpecialtyCard: React.FC<SpecialtyCardProps> = ({ specialty, onSelect }) => {
+const SpecialtyCard: React.FC<SpecialtyCardProps> = ({ specialty }) => {
     return (
-        <button 
-            onClick={() => onSelect(specialty)}
-            className="w-full bg-white p-4 rounded-lg shadow text-center hover:shadow-md transition-shadow"
-        >
-            <div className="text-4xl mb-2">{specialty.icon}</div>
-            <h4 className="font-semibold text-gray-800">{specialty.title}</h4>
-        </button>
+        <Link to={`/specialty/${specialty.id}`} className="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+            <img src={specialty.imageUrl} alt={specialty.title} className="w-full h-32 object-cover" />
+            <div className="p-4">
+                <h3 className="font-bold text-gray-800">{specialty.title}</h3>
+                <p className="text-sm text-gray-500">{specialty.category}</p>
+            </div>
+        </Link>
     );
 };
 

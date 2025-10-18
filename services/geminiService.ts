@@ -1,3 +1,4 @@
+
 import { GoogleGenAI } from "@google/genai";
 import type { GenerateContentResponse } from "@google/genai";
 
@@ -59,11 +60,10 @@ export const getAIFeedbackForEvidence = async (
       ...(image ? [fileToGenerativePart(image.base64, image.type)] : [])
     ];
 
-    // FIX: The 'contents' property expects an array of Content objects.
-    // The constructed parts array is a single Content payload, so it should be wrapped in an array.
+    // FIX: The 'contents' property should be a single Content object for a single-turn request.
     const response: GenerateContentResponse = await ai.models.generateContent({
         model: model,
-        contents: [{ parts: parts }],
+        contents: { parts: parts },
     });
     
     return response.text;

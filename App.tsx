@@ -1,82 +1,54 @@
-import React, { useState } from 'react';
-// FIX: Added .tsx extension to the import path.
-import Login from './components/Login.tsx';
-// FIX: Added .tsx extension to the import path.
-import Register from './components/Register.tsx';
-// FIX: Added .tsx extension to the import path.
-import Dashboard from './components/Dashboard.tsx';
-// FIX: Added .tsx extension to the import path.
-import SpecialtyDetail from './components/SpecialtyDetail.tsx';
-// FIX: Added .tsx extension to the import path.
+import React from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+
+// FIX: Import all necessary components for routing and layout.
 import Sidebar from './components/Sidebar.tsx';
-// FIX: Added .tsx extension to the import path.
 import Header from './components/Header.tsx';
-// FIX: Added .ts extension to the import path.
-import { MOCK_USER, MOCK_SPECIALTIES } from './services/mockData.ts';
-// FIX: Added .ts extension to the import path.
-import { User, Specialty } from './types.ts';
+import Dashboard from './components/Dashboard.tsx';
+import SpecialtyDetail from './components/SpecialtyDetail.tsx';
+import CategoryDetail from './components/CategoryDetail.tsx';
+import Login from './components/Login.tsx';
+import Register from './components/Register.tsx';
 
-type View = 'login' | 'register' | 'dashboard' | 'specialty';
+// FIX: Create placeholder components for routes that do not have dedicated component files.
+const Events: React.FC = () => <div className="p-6"><h1 className="text-2xl font-bold">Events</h1><p>Upcoming events will be listed here.</p></div>;
+const Profile: React.FC = () => <div className="p-6"><h1 className="text-2xl font-bold">Profile</h1><p>User profile information will be displayed here.</p></div>;
 
-const App: React.FC = () => {
-    const [view, setView] = useState<View>('dashboard'); // Default to dashboard for now
-    const [currentUser, setCurrentUser] = useState<User | null>(MOCK_USER);
-    const [selectedSpecialty, setSelectedSpecialty] = useState<Specialty | null>(MOCK_SPECIALTIES[0]);
-
-    const handleRegisterComplete = (formData: Partial<User>) => {
-        const newUser: User = {
-            ...MOCK_USER, // Start with mock data
-            ...formData,
-            id: 'u2', // assign new id
-            specialties: [] // start with no specialties
-        };
-        setCurrentUser(newUser);
-        setView('dashboard');
-    }
-
-    const handleSelectSpecialty = (specialty: Specialty) => {
-        setSelectedSpecialty(specialty);
-        setView('specialty');
-    }
-
-    const renderView = () => {
-        if (!currentUser) {
-             // For simplicity, we'll just show the register view. 
-             // A real app would have login/register switching.
-            return <Register onRegisterComplete={handleRegisterComplete} />;
-        }
-
-        switch (view) {
-            case 'dashboard':
-                return <Dashboard user={currentUser} onSelectSpecialty={handleSelectSpecialty} />;
-            case 'specialty':
-                if (selectedSpecialty) {
-                    return <SpecialtyDetail specialty={selectedSpecialty} onBack={() => setView('dashboard')} />;
-                }
-                // Fallback to dashboard if no specialty is selected
-                return <Dashboard user={currentUser} onSelectSpecialty={handleSelectSpecialty} />;
-            default:
-                return <Register onRegisterComplete={handleRegisterComplete} />;
-        }
-    };
-
-    if (!currentUser) {
-        return <div className="bg-gray-100">{renderView()}</div>;
-    }
-
-    return (
-        <div className="flex h-screen bg-gray-100">
-            <Sidebar />
-            <div className="flex-1 flex flex-col overflow-hidden">
-                <Header user={currentUser} />
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                    <div className="container mx-auto px-6 py-8">
-                        {renderView()}
-                    </div>
-                </main>
-            </div>
+// FIX: Define a main layout component to wrap routes that share common UI elements like Sidebar and Header.
+const MainLayout: React.FC = () => (
+    <>
+        <Sidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+            <Header />
+            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/specialty/:id" element={<SpecialtyDetail />} />
+                    <Route path="/category/:id" element={<CategoryDetail />} />
+                    <Route path="/events" element={<Events />} />
+                    <Route path="/profile" element={<Profile />} />
+                </Routes>
+            </main>
         </div>
+    </>
+);
+
+// FIX: Implement the main App component to set up the application's routing structure. This resolves errors related to the App component not being defined.
+const App: React.FC = () => {
+    return (
+        <Router>
+            <div className="flex h-screen bg-gray-100 font-sans">
+                {/* Routes for login and register which don't have the main layout */}
+                <Routes>
+                     <Route path="/login" element={<Login />} />
+                     <Route path="/register" element={<Register />} />
+                     {/* All other routes will use the MainLayout */}
+                     <Route path="/*" element={<MainLayout />} />
+                </Routes>
+            </div>
+        </Router>
     );
 };
 
+// FIX: Add a default export to make this file a module and allow it to be imported in index.tsx.
 export default App;
