@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { mockSpecialties } from '../services/mockData.ts';
-import { Specialty, Requirement } from '../types.ts';
-import LessonAccordion from './LessonAccordion.tsx';
+// FIX: Corrected import paths for root directory
+import { mockSpecialties } from './services/mockData.ts';
+import { Specialty, Requirement } from './types.ts';
+import LessonAccordion from './components/LessonAccordion.tsx';
 
 const SpecialtyDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -40,7 +42,7 @@ const SpecialtyDetail: React.FC = () => {
                     <LessonAccordion 
                         key={req.id} 
                         requirement={req} 
-                        onUpdate={handleRequirementUpdate}
+                        onUpdate={(updatedPart) => handleRequirementUpdate({ ...req, ...updatedPart })}
                     />
                 ))}
             </div>

@@ -1,98 +1,80 @@
+import { Specialty, SpecialtyCategory, Event, EvidenceStatus } from '../types.ts';
 
-import { Specialty, SpecialtyCategory, Event, Requirement, EvidenceStatus } from '../types.ts';
-
-export const mockRequirements: Requirement[] = [
-    {
-        id: 'req-1',
-        title: 'Requirement 1: Knot Tying',
-        description: 'Demonstrate how to tie a bowline, a sheet bend, and a clove hitch.',
-        evidence: {
-            id: 'ev-1',
-            description: '',
-            status: EvidenceStatus.PENDING,
-        }
-    },
-    {
-        id: 'req-2',
-        title: 'Requirement 2: First Aid',
-        description: 'Explain the ABCs of CPR and demonstrate the recovery position.',
-        evidence: {
-            id: 'ev-2',
-            description: 'I have described the ABCs in the text and attached a photo of the recovery position.',
-            status: EvidenceStatus.SUBMITTED,
-            submittedAt: new Date('2023-10-26T10:00:00Z'),
-            file: {
-                name: 'recovery-position.jpg',
-                base64: '', // placeholder
-                type: 'image/jpeg'
-            }
-        }
-    },
-    {
-        id: 'req-3',
-        title: 'Requirement 3: Camp Cooking',
-        description: 'Plan a menu for a weekend campout and cook one meal over a fire.',
-        evidence: {
-            id: 'ev-3',
-            description: 'Here is my menu plan and a picture of the chili I cooked.',
-            status: EvidenceStatus.COMPLETE,
-            aiFeedback: "¡Excelente trabajo! El menú se ve delicioso y bien balanceado, y la foto del chili se ve increíble. ¡Parece que dominas la cocina de campamento!",
-            submittedAt: new Date('2023-10-25T15:30:00Z'),
-            instructorFeedback: 'Great job, approved!',
-        }
-    }
-];
-
-export const mockSpecialties: Specialty[] = [
+const mockSpecialties: Specialty[] = [
     {
         id: 'spec-1',
-        title: 'Camping Skills I',
-        category: 'Outdoor Activities',
-        imageUrl: 'https://placehold.co/600x400/5E5CE6/white?text=Camping',
-        requirements: mockRequirements,
+        title: 'Nudos',
+        category: 'Artes y Habilidades Manuales',
+        imageUrl: 'https://via.placeholder.com/300x200.png?text=Nudos',
+        requirements: [
+            {
+                id: 'req-1-1',
+                title: 'Nudo As de Guía',
+                description: 'Aprender y demostrar cómo hacer el nudo As de Guía.',
+                evidence: {
+                    id: 'ev-1',
+                    description: 'He hecho el nudo y aquí está la foto.',
+                    imageUrl: 'https://via.placeholder.com/300x200.png?text=As+de+Guia',
+                    status: EvidenceStatus.COMPLETE,
+                    feedback: '¡Excelente trabajo! El nudo se ve perfecto.'
+                }
+            },
+            {
+                id: 'req-1-2',
+                title: 'Nudo de Pescador',
+                description: 'Aprender y demostrar cómo hacer el nudo de Pescador.',
+                evidence: {
+                    id: 'ev-2',
+                    description: 'Creo que lo hice bien.',
+                    status: EvidenceStatus.INCOMPLETE,
+                    feedback: 'Buen intento, pero parece que una de las vueltas está incorrecta. Inténtalo de nuevo.'
+                }
+            },
+            {
+                id: 'req-1-3',
+                title: 'Nudo Margarita',
+                description: 'Aprender y demostrar cómo hacer el nudo Margarita.',
+                evidence: {
+                    id: 'ev-3',
+                    description: 'Este fue difícil.',
+                    status: EvidenceStatus.PENDING,
+                }
+            },
+        ],
     },
     {
         id: 'spec-2',
-        title: 'First Aid',
-        category: 'Health & Science',
-        imageUrl: 'https://placehold.co/600x400/5E5CE6/white?text=First+Aid',
-        requirements: [],
+        title: 'Primeros Auxilios - Básico',
+        category: 'Salud y Ciencia',
+        imageUrl: 'https://via.placeholder.com/300x200.png?text=Primeros+Auxilios',
+        requirements: [
+            { id: 'req-2-1', title: 'ABC de la reanimación', description: 'Explicar el ABC de la reanimación.' },
+            { id: 'req-2-2', title: 'Tratamiento de quemaduras', description: 'Demostrar cómo tratar quemaduras leves.' },
+        ],
     },
-     {
-        id: 'spec-3',
-        title: 'Knots',
-        category: 'Outdoor Activities',
-        imageUrl: 'https://placehold.co/600x400/5E5CE6/white?text=Knots',
-        requirements: [],
-    }
 ];
 
-export const mockCategories: SpecialtyCategory[] = [
+const mockCategories: SpecialtyCategory[] = [
     {
         id: 'cat-1',
-        name: 'Outdoor Activities',
-        specialties: mockSpecialties.filter(s => s.category === 'Outdoor Activities'),
+        name: 'Artes y Habilidades Manuales',
+        specialties: [mockSpecialties[0]],
     },
     {
         id: 'cat-2',
-        name: 'Health & Science',
-        specialties: mockSpecialties.filter(s => s.category === 'Health & Science'),
+        name: 'Salud y Ciencia',
+        specialties: [mockSpecialties[1]],
     }
 ];
 
-export const mockEvents: Event[] = [
+const mockEvents: Event[] = [
     {
         id: 'event-1',
-        title: 'Pathfinder Camporee',
-        date: 'Oct 28-30, 2024',
-        location: 'Camp Wilderness',
-        imageUrl: 'https://placehold.co/600x400/34D399/white?text=Camporee',
-    },
-    {
-        id: 'event-2',
-        title: 'Community Service Day',
-        date: 'Nov 12, 2024',
-        location: 'City Park',
-        imageUrl: 'https://placehold.co/600x400/34D399/white?text=Service',
+        title: 'Camporee de Conquistadores',
+        date: 'Octubre 26-28, 2024',
+        location: 'Parque Nacional El Avila',
+        imageUrl: 'https://via.placeholder.com/300x200.png?text=Camporee',
     }
 ];
+
+export { mockSpecialties, mockCategories, mockEvents };

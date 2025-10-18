@@ -1,44 +1,34 @@
-
 export enum EvidenceStatus {
-  PENDING = 'PENDING',
-  SUBMITTED = 'SUBMITTED',
-  INCOMPLETE = 'INCOMPLETE',
-  COMPLETE = 'COMPLETE',
-}
-
-export interface EvidenceFile {
-  name: string;
-  base64: string;
-  type: string;
+    PENDING = 'PENDING',
+    COMPLETE = 'COMPLETE',
+    INCOMPLETE = 'INCOMPLETE',
 }
 
 export interface Evidence {
-  id: string;
-  description: string;
-  file?: EvidenceFile;
-  status: EvidenceStatus;
-  aiFeedback?: string;
-  submittedAt?: Date;
-  instructorFeedback?: string;
+    id: string;
+    description: string;
+    imageUrl?: string;
+    status: EvidenceStatus;
+    feedback?: string;
 }
 
 export interface Requirement {
-  id: string;
-  title: string;
-  description: string;
-  evidence?: Evidence;
+    id: string;
+    title: string;
+    description: string;
+    evidence?: Evidence;
 }
 
 export interface Specialty {
-  id: string;
-  title: string;
-  category: string;
-  imageUrl: string;
-  requirements: Requirement[];
+    id: string;
+    title: string;
+    category: string;
+    imageUrl: string;
+    requirements: Requirement[];
 }
 
 export interface SpecialtyCategory {
-    id: string;
+    id:string;
     name: string;
     specialties: Specialty[];
 }
