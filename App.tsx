@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { User, Specialty } from './types';
 import { MOCK_USER, MOCK_SPECIALTIES } from './services/mockData';
-import Login from './components/Login';
+import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import SpecialtyDetail from './components/SpecialtyDetail';
 import Header from './components/Header';
@@ -13,22 +12,28 @@ const App: React.FC = () => {
   const [selectedSpecialty, setSelectedSpecialty] = useState<Specialty | null>(null);
 
   useEffect(() => {
-    // Attempt to get user's location on initial load for the "club discovery" feature
+    // This logic is now part of the registration flow but can be kept for other purposes.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log('User location:', position.coords.latitude, position.coords.longitude);
-          // In a real app, this would be used to fetch nearby clubs.
+          console.log('User location available:', position.coords.latitude, position.coords.longitude);
         },
         (error) => {
-          console.error('Error getting location:', error.message);
+          console.error('Could not get location on initial load:', error.message);
         }
       );
     }
   }, []);
   
-  const handleLogin = () => {
-    setUser(MOCK_USER);
+  const handleRegisterComplete = (formData: Partial<User>) => {
+    // In a real app, this data would be sent to a server.
+    // Here, we merge it with our mock user to simulate a full profile.
+    const newUser = {
+        ...MOCK_USER,
+        ...formData,
+        name: `${formData.name}`, // Assuming name is collected in the form
+    };
+    setUser(newUser);
   };
 
   const handleLogout = () => {
@@ -74,7 +79,7 @@ const App: React.FC = () => {
 
 
   if (!user) {
-    return <Login onLogin={handleLogin} />;
+    return <Register onRegisterComplete={handleRegisterComplete} />;
   }
 
   return (

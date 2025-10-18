@@ -1,5 +1,4 @@
-
-import { User, Role, Club, Specialty, EvidenceStatus } from '../types';
+import { User, Role, Club, Specialty, EvidenceStatus, Interest } from '../types';
 
 export const MOCK_USER: User = {
   id: 'user-001',
@@ -7,18 +6,35 @@ export const MOCK_USER: User = {
   email: 'juan@example.com',
   role: Role.MEMBER,
   clubId: 'club-123',
-  avatarUrl: 'https://picsum.photos/100/100',
+  avatarUrl: 'https://i.pravatar.cc/100?u=juan-conquistador',
 };
 
-export const MOCK_CLUB: Club = {
-  id: 'club-123',
-  name: 'Club Fénix',
-  location: {
-    city: 'Mexico City',
-    state: 'CDMX',
-    country: 'Mexico',
-  },
-};
+export const MOCK_CLUBS_LIST: Club[] = [
+    { id: 'club-01', name: 'Georgia Gold', zone: 'Cumbres', logo: '🇬🇬', location: { city: 'Monterrey', state: 'NL', country: 'MX' } },
+    { id: 'club-02', name: 'Green Thunder', zone: 'Cumbres', logo: '⚡️', location: { city: 'Monterrey', state: 'NL', country: 'MX' } },
+    { id: 'club-03', name: 'Oakland Roots', zone: 'Centro', logo: '🌳', location: { city: 'San Nicolás', state: 'NL', country: 'MX' } },
+    { id: 'club-04', name: 'Blue Sky', zone: 'Centro', logo: '☀️', location: { city: 'San Nicolás', state: 'NL', country: 'MX' } },
+    { id: 'club-05', name: 'Washington', zone: 'Rodrigo', logo: '🦅', location: { city: 'Guadalupe', state: 'NL', country: 'MX' } },
+    { id: 'club-06', name: 'Aspen Campers', zone: 'Rodrigo', logo: '🏔️', location: { city: 'Guadalupe', state: 'NL', country: 'MX' } },
+    { id: 'club-07', name: 'Jahdai', zone: 'Zona', logo: '🙏', location: { city: 'Apodaca', state: 'NL', country: 'MX' } },
+    { id: 'club-08', name: 'Tiny Forest', zone: 'Zona', logo: '🌲', location: { city: 'Apodaca', state: 'NL', country: 'MX' } },
+];
+
+export const MOCK_INTERESTS: Interest[] = [
+  { id: 'travel', name: 'Viajes', icon: '✈️' },
+  { id: 'food', name: 'Comida', icon: '🍲' },
+  { id: 'adventures', name: 'Aventuras', icon: '🏞️' },
+  { id: 'helping', name: 'Ayudar', icon: '🙏' },
+  { id: 'nature', name: 'Naturaleza', icon: '🌿' },
+  { id: 'animals', name: 'Animales', icon: '🐾' },
+  { id: 'music', name: 'Música', icon: '🎵' },
+  { id: 'arts', name: 'Artes', icon: '🎨' },
+  { id: 'medicine', name: 'Medicina', icon: '🧠' },
+  { id: 'fun', name: 'Diversión', icon: '🎮' },
+  { id: 'sports', name: 'Deportes', icon: '🏀' },
+  { id: 'drawing', name: 'Dibujar', icon: '✏️' },
+];
+
 
 export const MOCK_SPECIALTIES: Specialty[] = [
   {

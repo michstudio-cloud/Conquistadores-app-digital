@@ -1,4 +1,3 @@
-
 export enum Role {
   ADMIN = 'Administrador Asociación',
   ZONE_COORDINATOR = 'Coordinador de Zona',
@@ -14,17 +13,29 @@ export interface User {
   role: Role;
   clubId: string;
   avatarUrl: string;
+  // New fields from registration
+  username?: string;
+  phone?: string;
+  birthDate?: string;
+  gender?: string;
+  country?: string;
+  postalCode?: string;
+  city?: string;
+  interests?: string[];
 }
 
 export interface Club {
-  id: string;
+  id:string;
   name: string;
+  logo: string; // Emoji or initial
+  zone: string;
   location: {
     city: string;
     state: string;
     country: string;
   };
 }
+
 
 export enum EvidenceStatus {
   PENDING = 'Pendiente',
@@ -60,4 +71,10 @@ export interface Specialty {
   icon: string; // emoji
   description: string;
   requirements: Requirement[];
+}
+
+export interface Interest {
+    id: string;
+    name: string;
+    icon: string;
 }
