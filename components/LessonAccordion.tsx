@@ -1,7 +1,9 @@
 
 import React, { useState } from 'react';
-import { Requirement, EvidenceStatus } from '../types';
-import { ChevronDownIcon, CheckCircleIcon, XCircleIcon, ClockIcon } from './Icons';
+// FIX: Added .ts extension to the import path.
+import { Requirement, EvidenceStatus } from '../types.ts';
+// FIX: Added .tsx extension to the import path.
+import { ChevronDownIcon, CheckCircleIcon, XCircleIcon, ClockIcon } from './Icons.tsx';
 import EvidenceUploader from './EvidenceUploader';
 
 interface LessonAccordionProps {

@@ -54,15 +54,16 @@ export const getAIFeedbackForEvidence = async (
   `;
 
   try {
-    // FIX: Build the parts array in a single expression to allow TypeScript to correctly infer the union type for mixed content (text and images).
     const parts = [
       { text: prompt },
       ...(image ? [fileToGenerativePart(image.base64, image.type)] : [])
     ];
 
+    // FIX: The 'contents' property expects an array of Content objects.
+    // The constructed parts array is a single Content payload, so it should be wrapped in an array.
     const response: GenerateContentResponse = await ai.models.generateContent({
         model: model,
-        contents: { parts: parts },
+        contents: [{ parts: parts }],
     });
     
     return response.text;

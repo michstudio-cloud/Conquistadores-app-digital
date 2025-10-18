@@ -1,7 +1,9 @@
 
 import React from 'react';
-import { Specialty, Requirement } from '../types';
-import { ArrowLeftIcon, BookOpenIcon } from './Icons';
+// FIX: Added .ts extension to the import path.
+import { Specialty, Requirement } from '../types.ts';
+// FIX: Added .tsx extension to the import path.
+import { ArrowLeftIcon, BookOpenIcon } from './Icons.tsx';
 import LessonAccordion from './LessonAccordion';
 
 interface SpecialtyDetailProps {

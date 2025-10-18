@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Specialty, EvidenceStatus } from '../types';
+// FIX: Added .ts extension to the import path.
+import { Specialty, EvidenceStatus } from '../types.ts';
 
 interface SpecialtyCardProps {
   specialty: Specialty;

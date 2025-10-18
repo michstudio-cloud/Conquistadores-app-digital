@@ -1,61 +1,25 @@
-export enum Role {
-  ADMIN = 'Administrador Asociación',
-  ZONE_COORDINATOR = 'Coordinador de Zona',
-  CLUB_DIRECTOR = 'Director de Club',
-  INSTRUCTOR = 'Consejero/Instructor',
-  MEMBER = 'Miembro',
-}
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-  clubId: string;
-  avatarUrl: string;
-  // New fields from registration
-  username?: string;
-  phone?: string;
-  birthDate?: string;
-  gender?: string;
-  country?: string;
-  postalCode?: string;
-  city?: string;
-  interests?: string[];
-}
-
-export interface Club {
-  id:string;
-  name: string;
-  logo: string; // Emoji or initial
-  zone: string;
-  location: {
-    city: string;
-    state: string;
-    country: string;
-  };
-}
-
+import React from 'react';
 
 export enum EvidenceStatus {
-  PENDING = 'Pendiente',
-  SUBMITTED = 'Enviado para Revisión',
-  INCOMPLETE = 'Incompleto',
-  COMPLETE = 'Completo',
+  PENDING = 'PENDING',
+  SUBMITTED = 'SUBMITTED',
+  INCOMPLETE = 'INCOMPLETE',
+  COMPLETE = 'COMPLETE',
+}
+
+export interface EvidenceFile {
+  name: string;
+  base64: string;
+  type: string;
 }
 
 export interface Evidence {
   id: string;
   description: string;
-  file?: {
-    name: string;
-    base64: string;
-    type: string;
-  };
-  submittedAt?: Date;
+  file?: EvidenceFile;
   status: EvidenceStatus;
-  feedback?: string;
   aiFeedback?: string;
+  submittedAt?: Date;
 }
 
 export interface Requirement {
@@ -68,13 +32,34 @@ export interface Requirement {
 export interface Specialty {
   id: string;
   title: string;
-  icon: string; // emoji
   description: string;
+  icon: string; // emoji
   requirements: Requirement[];
 }
 
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  phone: string;
+  birthDate?: string;
+  gender?: string;
+  country?: string;
+  postalCode?: string;
+  city?: string;
+  interests: string[];
+  clubId?: string;
+}
+
 export interface Interest {
+  id: string;
+  name: string;
+  icon: string; // emoji
+}
+
+export interface Club {
     id: string;
     name: string;
-    icon: string;
+    logo: React.ReactNode;
+    zone: string;
 }

@@ -1,8 +1,11 @@
 
 import React, { useState, useCallback, ChangeEvent } from 'react';
-import { Requirement, Evidence, EvidenceStatus } from '../types';
-import { getAIFeedbackForEvidence } from '../services/geminiService';
-import { SparklesIcon, PaperClipIcon } from './Icons';
+// FIX: Added .ts extension to the import path.
+import { Requirement, Evidence, EvidenceStatus } from '../types.ts';
+// FIX: Added .ts extension to the import path.
+import { getAIFeedbackForEvidence } from '../services/geminiService.ts';
+// FIX: Added .tsx extension to the import path.
+import { SparklesIcon, PaperClipIcon } from './Icons.tsx';
 
 interface EvidenceUploaderProps {
   requirement: Requirement;

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { User, Interest, Club } from '../types';
-import { MOCK_INTERESTS, MOCK_CLUBS_LIST } from '../services/mockData';
-import { ArrowLeftIcon, CalendarIcon, ChevronDownIcon, SearchIcon, UserCircleIcon, PencilIcon, ArrowRightIcon, XIcon } from './Icons';
+// FIX: Added .ts extension to the import path.
+import { User, Interest, Club } from '../types.ts';
+// FIX: Added .ts extension to the import path.
+import { MOCK_INTERESTS, MOCK_CLUBS_LIST } from '../services/mockData.ts';
+// FIX: Added .tsx extension to the import path.
+import { ArrowLeftIcon, CalendarIcon, ChevronDownIcon, SearchIcon, UserCircleIcon, PencilIcon, ArrowRightIcon, XIcon } from './Icons.tsx';
 
 // Helper components defined inside the main component file for co-location
 const RegistrationLayout: React.FC<{ title: string; onBack?: () => void; children: React.ReactNode; showNext: boolean; onNext: () => void; }> = ({ title, onBack, children, showNext, onNext }) => (

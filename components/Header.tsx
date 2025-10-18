@@ -1,38 +1,30 @@
-
 import React from 'react';
-import { User } from '../types';
+import { User } from '../types.ts';
+import { SearchIcon } from './Icons.tsx';
 
 interface HeaderProps {
-  user: User;
-  onLogout: () => void;
+    user: User;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, onLogout }) => {
-  return (
-    <header className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
-            <div className="text-2xl">🔺</div>
-            <span className="text-xl font-bold text-gray-800">Escalante</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-right">
-              <p className="font-medium text-gray-800">{user.name}</p>
-              <p className="text-sm text-gray-500">{user.role}</p>
+const Header: React.FC<HeaderProps> = ({ user }) => {
+    return (
+        <header className="bg-white shadow-sm p-4 flex justify-between items-center">
+            <div className="relative">
+                <input
+                    type="text"
+                    placeholder="Buscar especialidad..."
+                    className="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <SearchIcon className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
             </div>
-            <img className="h-10 w-10 rounded-full" src={user.avatarUrl} alt="User avatar" />
-            <button
-              onClick={onLogout}
-              className="px-3 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md transition"
-            >
-              Salir
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
+            <div className="flex items-center space-x-4">
+                <span className="font-medium text-gray-700">{user.username}</span>
+                <div className="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
+                    {user.username.charAt(0).toUpperCase()}
+                </div>
+            </div>
+        </header>
+    );
 };
 
 export default Header;
